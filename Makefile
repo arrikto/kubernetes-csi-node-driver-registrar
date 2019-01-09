@@ -14,7 +14,7 @@
 
 .PHONY: all node-driver-registrar clean test
 
-REGISTRY_NAME=quay.io/k8scsi
+REGISTRY_NAME=registry.dev.arr/csi
 IMAGE_NAME=csi-node-driver-registrar
 IMAGE_VERSION=v1.0-canary
 IMAGE_TAG=$(REGISTRY_NAME)/$(IMAGE_NAME):$(IMAGE_VERSION)
