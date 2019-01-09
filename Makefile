@@ -16,7 +16,7 @@
 
 REGISTRY_NAME=registry.dev.arr/csi
 IMAGE_NAME=csi-node-driver-registrar
-IMAGE_VERSION=v1.0-canary
+IMAGE_VERSION=v1.0.2.arr1
 IMAGE_TAG=$(REGISTRY_NAME)/$(IMAGE_NAME):$(IMAGE_VERSION)
 
 REV=$(shell git describe --long --tags --match='v*' --dirty)
