@@ -27,15 +27,22 @@ else
 TESTARGS =
 endif
 
+GOPKG = github.com/kubernetes-csi/node-driver-registrar
 
 all: node-driver-registrar
 
-node-driver-registrar:
+node-driver-registrar: workspace
 	mkdir -p bin
-	CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-X main.version=$(REV) -extldflags "-static"' -o ./bin/node-driver-registrar ./cmd/node-driver-registrar
+	GOPATH=${PWD}/workspace CGO_ENABLED=0 GOOS=linux \
+		   go build -a -ldflags '-X main.version=$(REV) -extldflags "-static"' \
+		   -o ./bin/node-driver-registrar ${GOPKG}/cmd/node-driver-registrar
+
+workspace:
+	mkdir -p workspace/src/$(dir ${GOPKG})
+	ln -s ${PWD} workspace/src/${GOPKG}
 
 clean:
-	rm -rf bin
+	rm -rf bin workspace
 
 container: node-driver-registrar
 	docker build -t $(IMAGE_TAG) .
